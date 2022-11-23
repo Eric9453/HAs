@@ -20,10 +20,25 @@ sensor:
 4. 寫入yaml後重新啟動HA，等待數值讀入
 5. 如有疑問可以先參考[HA官方說明](https://www.home-assistant.io/integrations/sensor.command_line/)
 6. 設置自動化截圖，看頻率要多久，我是一天一次，檔名都用gas.jpg，存檔路徑需與第3點的yaml一致
+```yaml
+alias: Gas Ocr Snapshot@0400
+description: 凌晨4點瓦斯表截圖做OCR
+trigger:
+  - platform: time
+    at: "04:00:00"
+condition: []
+action:
+  - service: camera.snapshot
+    data:
+      filename: /media/gas.jpg
+    target:
+      entity_id: camera.camera103
+mode: single
+```
 7. value_template參數簡述：  
-value_json['ParsedResults'][0]['ParsedText']→解析json至文字辨識結果的層級  
-.split('\n')[1:2]→利用換行符號分割文段，並取出瓦斯度數的部分  
-|replace→開始瘋狂取代你不想要的內容  
+- value_json['ParsedResults'][0]['ParsedText']→解析json至文字辨識結果的層級  
+- .split('\n')[1:2]→利用換行符號分割文段，並取出瓦斯度數的部分  
+- |replace→開始瘋狂取代你不想要的內容  
 
 ---
 題外話：HA中內建的7段數字辨識效果不是很好...還是走OCR PAI吧
