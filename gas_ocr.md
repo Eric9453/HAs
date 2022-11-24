@@ -29,7 +29,7 @@ sensor:
     unit_of_measurement: 'm³'
     json_attributes:
       - ParsedResults
-    value_template: "{{ (value_json['ParsedResults'][0]['ParsedText'].split('\n')[1:2])|replace('O','0')|replace(']','')|replace('[','')|replace(\"'\",'') }}"
+    value_template: "{{ (value_json['ParsedResults'][0]['ParsedText'].split('\n1000')[0].split('\n')[-1])|replace('O','0')|replace(' ','') }}"
     scan_interval: 86400
     command_timeout: 30
 ```
@@ -39,6 +39,39 @@ sensor:
 - value_json['ParsedResults'][0]['ParsedText']→解析json至文字辨識結果的層級  
 - .split('\n')[1:2]→利用換行符號分割文段，並取出瓦斯度數的部分  
 - |replace→開始瘋狂取代你不想要的內容  
+
+8. 如果要一氣呵成的完成定時自動截圖+OCR+符合數據後動作，可使用下列自動化~~；要用在車牌辨識後開門也是可以的，嘻嘻~~
+```yaml
+alias: Gas Ocr Snapshot@1200
+description: 中午12點瓦斯表截圖做OCR後符合數值就切換燈具
+trigger:
+  - platform: time
+    at: "12:00:00"
+condition: []
+action:
+  - service: camera.snapshot
+    data:
+      filename: /media/gas.jpg
+    target:
+      entity_id: camera.camera103
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+    enabled: true
+  - service: command_line.reload
+    data: {}
+  - if:
+      - condition: template
+        value_template: "{{ '0003' in states.sensor.gas_ocr.state }}"
+    then:
+      - type: toggle
+        device_id: b108ec39697d001f0300b02e75583503
+        entity_id: switch.sonoff_10011b726c
+        domain: switch
+mode: single
+```
 
 ---
 題外話：HA中內建的7段數字辨識效果不是很好...還是走OCR PAI吧
