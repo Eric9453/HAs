@@ -1,5 +1,5 @@
 # 瓦斯表讀數接入HA (OCR API)
-![image](https://user-images.githubusercontent.com/21095518/203475044-4935ffe9-54a1-447b-9e92-bdf86bfa8e41.png)
+![image](https://user-images.githubusercontent.com/21095518/203713482-531260b9-25c3-4dc5-a241-a46118c257e6.png)
 
 1. 申請[OCR API](http://ocr.space/OCRAPI)，免費版即可，一天有500次的使用額度，十分足夠 (credited by @maxrdnew)
 2. 架設攝影機，構圖務必方正，截圖時光線充足、無反光
@@ -73,5 +73,6 @@ action:
 mode: single
 ```
 
+![image](https://user-images.githubusercontent.com/21095518/203475044-4935ffe9-54a1-447b-9e92-bdf86bfa8e41.png)
 ---
 題外話：HA中內建的7段數字辨識效果不是很好...還是走OCR PAI吧
