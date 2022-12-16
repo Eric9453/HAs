@@ -1,0 +1,191 @@
+# This Lovelace yaml has to be used with multiple-entity-row
+type: entities
+entities:
+  - entity: switch.kasa_smart_plug_32b2_1
+    type: custom:multiple-entity-row
+    name: P1
+    styles:
+      width: px
+    state_header: null
+    state_color: true
+    toggle: true
+    icon: mdi:cellphone-charging
+    secondary_info: last-changed
+    entities:
+      - entity: sensor.kasa_smart_plug_32b2_1_current
+        name: I
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_1_current_consumption
+        name: CC
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_1_today_s_consumption
+        name: TC
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_1_total_consumption
+        name: TTC
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_1_voltage
+        name: V
+        styles:
+          width: px
+  - entity: switch.kasa_smart_plug_32b2_2
+    type: custom:multiple-entity-row
+    name: P2
+    styles:
+      width: px
+    state_header: null
+    state_color: true
+    toggle: true
+    icon: mdi:disc-player
+    secondary_info: last-changed
+    entities:
+      - entity: sensor.kasa_smart_plug_32b2_2_current
+        name: I
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_2_current_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_2_today_s_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_2_total_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_2_voltage
+        name: 　
+        styles:
+          width: px
+  - entity: switch.kasa_smart_plug_32b2_3
+    type: custom:multiple-entity-row
+    name: P3
+    styles:
+      width: px
+    state_header: null
+    state_color: true
+    toggle: true
+    icon: mdi:cellphone-charging
+    secondary_info: last-changed
+    entities:
+      - entity: sensor.kasa_smart_plug_32b2_3_current
+        name: I
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_3_current_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_3_today_s_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_3_total_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_3_voltage
+        name: 　
+        styles:
+          width: px
+  - entity: switch.kasa_smart_plug_32b2_4
+    type: custom:multiple-entity-row
+    name: P4
+    styles:
+      width: px
+    state_header: null
+    state_color: true
+    toggle: true
+    icon: mdi:power-plug-outline
+    secondary_info: last-changed
+    entities:
+      - entity: sensor.kasa_smart_plug_32b2_4_current
+        name: I
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_4_current_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_4_today_s_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_4_total_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_4_voltage
+        name: 　
+        styles:
+          width: px
+  - entity: switch.kasa_smart_plug_32b2_5
+    type: custom:multiple-entity-row
+    name: P5
+    styles:
+      width: px
+    state_header: null
+    state_color: true
+    toggle: true
+    icon: mdi:power-socket-us
+    secondary_info: last-changed
+    entities:
+      - entity: sensor.kasa_smart_plug_32b2_5_current
+        name: I
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_5_current_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_5_today_s_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_5_total_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_5_voltage
+        name: 　
+        styles:
+          width: px
+  - entity: switch.kasa_smart_plug_32b2_6
+    type: custom:multiple-entity-row
+    name: P6
+    styles:
+      width: px
+    state_header: null
+    state_color: true
+    toggle: true
+    icon: mdi:speaker-bluetooth
+    secondary_info: last-changed
+    entities:
+      - entity: sensor.kasa_smart_plug_32b2_6_current
+        name: I
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_6_current_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_6_today_s_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_6_total_consumption
+        name: 　
+        styles:
+          width: px
+      - entity: sensor.kasa_smart_plug_32b2_6_voltage
+        name: 　
+        styles:
+          width: px
+show_header_toggle: false
+state_color: false
