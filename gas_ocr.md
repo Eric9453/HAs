@@ -76,3 +76,63 @@ mode: single
 ![image](https://user-images.githubusercontent.com/21095518/203475044-4935ffe9-54a1-447b-9e92-bdf86bfa8e41.png)
 ---
 題外話：HA中內建的7段數字辨識效果不是很好...還是走OCR PAI吧
+---
+## 2023-02-16 更新
+給吳大的code
+```yaml
+# 吳大的瓦斯讀表-屬性
+sensor:
+  - platform: command_line  #https://www.home-assistant.io/integrations/sensor.command_line/ #輪巡間隔單位為秒
+    command: 'curl -H "apikey:###API  API  API###" --form "file=@/config/www/gas.jpg" --form "OCREngine=5" https://api.ocr.space/Parse/Image'
+    name: gas_ocr
+    unit_of_measurement: 'm³'
+    json_attributes:
+      - ParsedResults
+    value_template: "{{ (value_json['ParsedResults'][0]['ParsedText'].split('\n1000'))[0]|replace('\n','')|replace(' ','') }}"
+    scan_interval: 86400
+    command_timeout: 30
+```
+利用HA內的功耗表達成每期度數計算(不用寫資料庫計算)
+![SC_2023-02-15_17-24-09_001](https://user-images.githubusercontent.com/21095518/219263602-0091fab2-8b47-4e59-a0a6-a71031b8b5af.png)
+
+搭配Line notify後可以這麼做
+![gas](https://user-images.githubusercontent.com/21095518/219264490-7ce8dc37-df86-4c13-9a7f-003da874c59c.jpg)
+
+
+在小蟻內回call HA內的腳本，因為無法用HA走telnet控制小蟻開關紅外線照明，改為在小蟻內定時控制紅外後回call HA腳本
+```yaml
+alias: Gas meter snapt and OCR
+sequence:
+  - service: camera.snapshot
+    data:
+      filename: /config/www/gas.jpg
+    target:
+      entity_id: camera.camera3
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - service: command_line.reload
+    data: {}
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - service: notify.linebot_1
+    data:
+      message: >-
+        瓦斯表讀數現為{{ states('sensor.gas_ocr')|replace('00','') }}m³(度)，本期已使用{{
+        states('sensor.gas_consumption')}}度
+      data:
+        file: /config/www/gas.jpg
+  - service: tts.azure_cognitive_speech_say
+    data:
+      entity_id: media_player.hei_la_ba
+      message: >-
+        瓦斯表讀數現為{{ states('sensor.gas_ocr')|replace('00','') }}度，本期已使用{{
+        states('sensor.gas_consumption')}}度
+mode: single
+icon: mdi:gas-burner
+```
